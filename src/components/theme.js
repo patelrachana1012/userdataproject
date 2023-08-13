@@ -5,10 +5,10 @@ import { teal } from "@mui/material/colors";
 const theme = createTheme({
   palette: {
     primary: {
-      main: blueGrey[700], // Main primary color
+      main: "#00455c", // Main primary color
     },
     secondary: {
-      main: blueGrey["A200"], // Main secondary color
+      main: "#71a3b8", // Main secondary color
     },
     // Additional color options
     error: {

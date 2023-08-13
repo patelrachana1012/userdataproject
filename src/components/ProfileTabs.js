@@ -36,13 +36,13 @@ const useStyles = makeStyles((theme) => ({
 
   contentContainer: {
     padding: theme.spacing(3),
-    backgroundColor: theme.palette.background.primary,
+    backgroundColor: "",
     borderRadius: theme.spacing(2),
   },
   avatarContainer: {
     display: "flex",
     alignItems: "center",
-    // marginBottom: theme.spacing(3),
+    // marginBottom: theme.spacing(3),\
     padding: 20,
   },
   customClass: {
@@ -54,9 +54,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   avatar: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
+    width: theme.spacing(15),
+    height: theme.spacing(15),
     marginRight: theme.spacing(3),
+    "@media (max-width: 600px)": {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+      marginRight: theme.spacing(2),
+    },
   },
   tabsContainer: {
     flexGrow: 1,
@@ -105,24 +110,42 @@ const ProfileTabs = () => {
   return (
     <div className={classes.root}>
       <Container className={classes.contentContainer}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} style={{ display: "flex" }}>
-            <Paper
-              className={classes.profileHeader}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                flexDirection: "column",
-                width: "100%",
+        <Paper
+          className={classes.profileHeader}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "column",
+            textAlign: "center",
+            alignItems: "center",
+            width: "100%",
+            backgroundColor: "#c0cace",
+            marginBottom: "15px",
+          }}
+        >
+          <div className={classes.avatarContainer}>
+            <Avatar
+              alt={user.name}
+              src={`https://i.pravatar.cc/150?u=${user.id}`}
+              sx={{
+                width: 180,
+                height: 180,
               }}
-            >
-              <div className={classes.avatarContainer}>
-                <Avatar
-                  alt={user.name}
-                  src={`https://i.pravatar.cc/150?u=${user.id}`}
-                  sx={{ width: 100, height: 100 }}
-                />
-
+            />
+          </div>
+          <Grid container spacing={0}>
+            <Grid item xs={12} sm={6} style={{ display: "flex" }}>
+              <Paper
+                className={classes.profileHeader}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  width: "100%",
+                  border: "1px",
+                  margin: "10px",
+                }}
+              >
                 <Box component="div" sx={{ padding: 2 }}>
                   <Typography variant="h5" style={{ marginBottom: "8px" }}>
                     {user.name}
@@ -135,71 +158,73 @@ const ProfileTabs = () => {
                     Email: {user.email}
                   </Box>
                 </Box>
-              </div>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} style={{ display: "flex" }}>
-            <Paper
-              className={classes.profileHeader}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                flexDirection: "column",
-                width: "100%",
-              }}
-            >
-              <Box p={1}>
-                <div>
-                  <Typography variant="h5" style={{ marginBottom: "8px" }}>
-                    Address
-                  </Typography>
-                  <Box
-                    component="span"
-                    sx={{ display: "block", marginBottom: "6px" }}
-                  >
-                    {user.address.street}
-                  </Box>
-                  <Box component="span" sx={{ display: "block" }}>
-                    <i>
-                      {user.address.suite},{user.address.city},
-                      {user.address.zipcode}
-                    </i>
-                  </Box>
-                </div>
-              </Box>
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
-            <AppBar position="static" color="default">
-              <Tabs
-                value={tabValue}
-                onChange={handleTabChange}
-                className={classes.tabsContainer}
-                textColor="primary"
-                variant="fullWidth"
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} style={{ display: "flex" }}>
+              <Paper
+                className={classes.profileHeader}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  width: "100%",
+                  border: "1px ",
+                  margin: "10px",
+                }}
               >
-                <Tab
-                  label="Posts"
-                  className={(classes.tabLabel, classes.customClass)}
-                />
-                <Tab
-                  label="Albums"
-                  className={(classes.tabLabel, classes.customClass)}
-                />
-              </Tabs>
-            </AppBar>
-
-            {tabValue === 0 && (
-              <Box sx={{ pt: 3 }}>
-                <Posts userId={userId} />
-              </Box>
-            )}
-            {tabValue === 1 && (
-              <Box sx={{ pt: 3 }}>
-                <Albums userId={userId} />
-              </Box>
-            )}
+                <Box p={1}>
+                  <div>
+                    <Typography variant="h5" style={{ marginBottom: "8px" }}>
+                      Address
+                    </Typography>
+                    <Box
+                      component="span"
+                      sx={{ display: "block", marginBottom: "6px" }}
+                    >
+                      {user.address.street}
+                    </Box>
+                    <Box component="span" sx={{ display: "block" }}>
+                      <i>
+                        {user.address.suite},{user.address.city},
+                        {user.address.zipcode}
+                      </i>
+                    </Box>
+                  </div>
+                </Box>
+              </Paper>
+            </Grid>
           </Grid>
+        </Paper>
+        <Grid item xs={12}>
+          <AppBar position="static" color="default">
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              className={classes.tabsContainer}
+              textColor="primary"
+              variant="fullWidth"
+            >
+              <Tab
+                label="Posts"
+                className={(classes.tabLabel, classes.customClass)}
+              />
+              <Tab
+                label="Albums"
+                className={(classes.tabLabel, classes.customClass)}
+              />
+            </Tabs>
+          </AppBar>
+
+          {tabValue === 0 && (
+            <Box sx={{ pt: 3 }}>
+              <Posts userId={userId} />
+            </Box>
+          )}
+          {tabValue === 1 && (
+            <Box sx={{ pt: 3 }}>
+              <Albums userId={userId} />
+            </Box>
+          )}
         </Grid>
       </Container>
     </div>
