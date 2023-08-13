@@ -5,20 +5,33 @@ import {
   Typography,
   Pagination,
   Divider,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+  Box,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import theme1 from "./theme";
 import CommentIcon from "@mui/icons-material/Comment";
+import CommentsDialog from "./CommentsDialog";
 import Tooltip from "@mui/material/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   card: {
     marginBottom: theme.spacing(1),
-    backgroundColor: theme1.palette.secondary.main, // Set the background color
+    backgroundColor: theme.palette.secondary.main, // Set the background color
     borderRadius: theme.spacing(1),
     position: "relative",
+    padding: 0,
+  },
+  customFont: {
+    fontFamily: theme.typography.fontFamily,
   },
   iconContainer: {
     position: "absolute",
@@ -30,13 +43,20 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(1),
     right: theme.spacing(1),
   },
+  customFont: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: "bolder",
+  },
   rightAlign: {
     textAlign: "right", // Align content to the right
   },
   cardContent: {
     padding: theme.spacing(2),
-    backgroundColor: "theme1.palette.secondary.main",
+    backgroundColor: theme.palette.secondary.light,
     color: "#293132",
+  },
+  customClass: {
+    padding: "0",
   },
   pagination: {
     marginTop: theme.spacing(3),
@@ -70,7 +90,11 @@ const Posts = ({ userId }) => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
+  // const [data, setData] = useState([]);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [postTitle, setPostTitle] = useState("");
   const postsPerPage = 5; // Number of posts to display per page
 
   useEffect(() => {
@@ -93,21 +117,45 @@ const Posts = ({ userId }) => {
     setPage(newPage);
   };
 
+  const fetchComments = (postId, title) => {
+    axios
+      .get(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
+      .then((response) => {
+        setComments(response.data);
+        setPostTitle(title);
+        setOpenDialog(true);
+      })
+      .catch((error) => {
+        console.error("Error fetching comments:", error);
+      });
+  };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
   return (
-    <div>
+    <>
       {posts.map((post) => (
         <Card key={post.id} className={classes.card}>
           <CardContent className={classes.cardContent}>
-            <Typography variant="h6" className={classes.cardText}>
+            <Typography
+              variant="h6"
+              className={(classes.cardText, classes.customFont)}
+            >
               {post.title}
             </Typography>
             <Typography variant="caption" className={classes.dateContainer}>
               Posted on: 10/08/2023 at 4:55 PM
             </Typography>
             <Divider />
-            <Typography variant="body1">{post.body}</Typography>
+            <Typography variant="body1" pt={2}>
+              {post.body}
+            </Typography>
             <div className={classes.iconContainer}>
-              <Link to={`/post/${post.id}`}>
+              <Link
+                // to={`/post/${post.id}`}
+                onClick={() => fetchComments(post.id, post.title)}
+              >
                 <Tooltip title="View Comments">
                   {" "}
                   <CommentIcon className={classes.icon} />
@@ -125,7 +173,25 @@ const Posts = ({ userId }) => {
           color="primary"
         />
       </div>
-    </div>
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>
+          <strong>
+            <Box comments="span" sx={{ display: "block" }}>
+              Comments for
+            </Box>
+          </strong>
+          {postTitle}
+        </DialogTitle>
+        <DialogContent>
+          <CommentsDialog comments={comments} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 

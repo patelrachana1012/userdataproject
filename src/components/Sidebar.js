@@ -15,9 +15,13 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import logo from "../logo.svg";
+// import logo from "./qstrat.png";
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
+const navItems = [
+  { title: "Home", path: "/" },
+  { title: "About", path: "/about" },
+  { title: "Contact", path: "/contact" },
+];
 
 function Sidebar(props) {
   const { window } = props;
@@ -29,19 +33,40 @@ function Sidebar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 0 }}>
-        MUI
-      </Typography>
+      <Box sx={{}}>
+        <Link href="/">
+          <Box
+            component="img"
+            sx={{
+              height: 50,
+              flexGrow: 1,
+              textAlign: "center",
+              display: "block",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "auto",
+              width: "25%",
+            }}
+            alt="Logo"
+            src="/qstrat.png"
+          />
+        </Link>
+      </Box>
       <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+
+      {navItems.map((item) => (
+        <List key={item.title}>
+          <ListItem key={item.title} disablePadding>
+            <ListItemButton
+              sx={{ textAlign: "center" }}
+              component={Link}
+              to={item.path}
+            >
+              <ListItemText primary={item.title} />
             </ListItemButton>
           </ListItem>
-        ))}
-      </List>
+        </List>
+      ))}
     </Box>
   );
 
@@ -51,7 +76,7 @@ function Sidebar(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav">
+      <AppBar component="nav" variant="primary">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -72,20 +97,36 @@ function Sidebar(props) {
               <Box
                 component="img"
                 sx={{
-                  height: 54,
+                  height: 70,
                   flexGrow: 1,
                   display: { xs: "none", sm: "block" },
                 }}
                 alt="Logo"
-                src={logo}
+                src="/qstrat.png"
               />
             </Link>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
-              </Button>
+              // <Button
+              //   key={item.title}
+              //   sx={{ color: "#fff" }}
+              //   component={Link}
+              //   to={item.path}
+              // >
+              //    {item.title}
+              // </Button>
+              <Link
+                href={item.path}
+                sx={{
+                  color: "#fff",
+                  mr: 2,
+                  textTransform: "capitalize",
+                  fontWeight: "500",
+                }}
+              >
+                {item.title}
+              </Link>
             ))}
           </Box>
         </Toolbar>

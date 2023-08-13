@@ -9,48 +9,72 @@ import {
   Paper,
   Typography,
   Avatar,
+  ThemeProvider,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 import Posts from "./Posts";
 import Albums from "./Albums";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
-import theme1 from "./theme";
+
+//import { makeStyles } from "@material-ui/core/styles";
+// import theme1 from "./theme";
 import { Margin } from "@mui/icons-material";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     paddingTop: theme.spacing(2),
-    minHeight: "100vh", // Ensure full viewport height
+    padding: "10px",
+    // minHeight: "100vh", // Ensure full viewport height
+    // padding: "-24px",
   },
+  tab: {
+    "& .MuiBox-root": {
+      padding: "0px",
+    },
+  },
+
   contentContainer: {
     padding: theme.spacing(3),
-    backgroundColor: theme1.palette.background.primary,
+    backgroundColor: theme.palette.background.primary,
     borderRadius: theme.spacing(2),
   },
   avatarContainer: {
     display: "flex",
     alignItems: "center",
-    marginBottom: theme.spacing(3),
+    // marginBottom: theme.spacing(3),
+    padding: 20,
+  },
+  customClass: {
+    padding: "0",
+    transition: "transform 0.2s", // Add a transition effect
+    "&:hover": {
+      transform: "scale(1.05)", // Apply scale transformation on hover
+      fontWeight: "bold",
+    },
   },
   avatar: {
-    width: theme.spacing(30),
-    height: theme.spacing(30),
+    width: theme.spacing(10),
+    height: theme.spacing(10),
     marginRight: theme.spacing(3),
   },
   tabsContainer: {
     flexGrow: 1,
-    backgroundColor: theme1.palette.background.secondary,
+    backgroundColor: theme.palette.background.secondary,
+    padding: 0,
+  },
+  tabPanelFullWidth: {
+    width: "100%", // Set the width to 100%
   },
   profileHeader: {
-    backgroundColor: "#f00", // Bright orange color
+    //backgroundColor: "#f00", // Bright orange color
     //color: "#f00",
-    padding: theme.spacing(2),
-    borderRadius: theme.spacing(2),
-    boxShadow: theme.shadows[3],
+    // padding: theme.spacing(2),
+    // borderRadius: theme.spacing(2),
+    // boxShadow: theme.shadows[3],
   },
   tabLabel: {
-    color: theme1.palette.text.secondary,
+    color: theme.palette.text.secondary,
   },
 }));
 
@@ -82,48 +106,59 @@ const ProfileTabs = () => {
     <div className={classes.root}>
       <Container className={classes.contentContainer}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.profileHeader}>
-              <Box>
-                <div className={classes.avatarContainer}>
-                  <Avatar
-                    alt={user.name}
-                    src={`https://i.pravatar.cc/150?u=${user.id}`}
-                    className={classes.avatar}
-                  />
-                  <div>
-                    <Typography variant="h5" style={{ marginBottom: "8px" }}>
-                      {user.name}
-                    </Typography>
+          <Grid item xs={12} sm={6} style={{ display: "flex" }}>
+            <Paper
+              className={classes.profileHeader}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+                width: "100%",
+              }}
+            >
+              <div className={classes.avatarContainer}>
+                <Avatar
+                  alt={user.name}
+                  src={`https://i.pravatar.cc/150?u=${user.id}`}
+                  sx={{ width: 100, height: 100 }}
+                />
 
-                    <Box component="span" sx={{ display: "block" }}>
-                      @{user.username}
-                    </Box>
-                    <Box component="span" sx={{ display: "block" }}>
-                      Email: {user.email}
-                    </Box>
-                    {/* Display other user profile data here */}
-                  </div>
-                </div>
-              </Box>
+                <Box component="div" sx={{ padding: 2 }}>
+                  <Typography variant="h5" style={{ marginBottom: "8px" }}>
+                    {user.name}
+                  </Typography>
+
+                  <Box component="span" sx={{ display: "block" }}>
+                    @{user.username}
+                  </Box>
+                  <Box component="span" sx={{ display: "block" }}>
+                    Email: {user.email}
+                  </Box>
+                </Box>
+              </div>
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.profileHeader}>
+          <Grid item xs={12} sm={6} style={{ display: "flex" }}>
+            <Paper
+              className={classes.profileHeader}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+                width: "100%",
+              }}
+            >
               <Box p={1}>
-                {/* Second section of profile */}
                 <div>
                   <Typography variant="h5" style={{ marginBottom: "8px" }}>
                     Address
                   </Typography>
-
                   <Box
                     component="span"
                     sx={{ display: "block", marginBottom: "6px" }}
                   >
                     {user.address.street}
                   </Box>
-
                   <Box component="span" sx={{ display: "block" }}>
                     <i>
                       {user.address.suite},{user.address.city},
@@ -141,17 +176,29 @@ const ProfileTabs = () => {
                 onChange={handleTabChange}
                 className={classes.tabsContainer}
                 textColor="primary"
+                variant="fullWidth"
               >
-                <Tab label="Posts" className={classes.tabLabel} />
-                <Tab label="Albums" className={classes.tabLabel} />
+                <Tab
+                  label="Posts"
+                  className={(classes.tabLabel, classes.customClass)}
+                />
+                <Tab
+                  label="Albums"
+                  className={(classes.tabLabel, classes.customClass)}
+                />
               </Tabs>
             </AppBar>
-            <TabPanel value={tabValue} index={0}>
-              <Posts userId={userId} />
-            </TabPanel>
-            <TabPanel value={tabValue} index={1}>
-              <Albums userId={userId} />
-            </TabPanel>
+
+            {tabValue === 0 && (
+              <Box sx={{ pt: 3 }}>
+                <Posts userId={userId} />
+              </Box>
+            )}
+            {tabValue === 1 && (
+              <Box sx={{ pt: 3 }}>
+                <Albums userId={userId} />
+              </Box>
+            )}
           </Grid>
         </Grid>
       </Container>

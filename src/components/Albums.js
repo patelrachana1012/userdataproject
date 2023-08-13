@@ -5,27 +5,46 @@ import {
   Typography,
   Button,
   Pagination,
+  Grid,
+  Box,
+  Link,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import axios from "axios";
 import PhotoGallery from "./PhotoGallery";
-import { makeStyles } from "@material-ui/core/styles";
-import theme1 from "./theme";
+import CardMedia from "@mui/material/CardMedia";
 const useStyles = makeStyles((theme) => ({
   card: {
     marginBottom: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.main, // Set the background color
+    backgroundColor: theme.palette.secondary.light, // Set the background color
     borderRadius: theme.spacing(2),
-  },
-  cardContent: {
-    backgroundColor: theme1.palette.secondary.main,
-    display: "flex",
-    justifyContent: "space-between", // Align items to the end of the card
-    alignItems: "center", // Vertically center the button
+    transition: "transform 0.2s", // Add a transition effect
+    "&:hover": {
+      transform: "scale(1.05)", // Apply scale transformation on hover
+    },
   },
   pagination: {
     marginTop: theme.spacing(3),
     display: "flex",
     justifyContent: "center",
+  },
+  link: {
+    color: "#00ff00",
+    "&:hover": {
+      color: "primary",
+      textDecoration: "underline #000000",
+    },
+  },
+
+  overrides: {
+    MuiCardContent: {
+      root: {
+        padding: 0,
+        "&:last-child": {
+          paddingBottom: 0,
+        },
+      },
+    },
   },
 }));
 
@@ -36,15 +55,7 @@ const Albums = ({ userId }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [selectedAlbum, setSelectedAlbum] = useState(null);
 
-  const albumsPerPage = 5; // Number of albums to display per page
-
-  //   useEffect(() => {
-  //     const fetchPosts = async () => {
-  //       const usersData = await getPosts(userId, page, postsPerPage);
-  //       setPosts(usersData);
-  //     };
-  //     fetchPosts();
-  //   }, [userId, page]);
+  const albumsPerPage = 6; // Number of albums to display per page
 
   useEffect(() => {
     axios
@@ -76,21 +87,67 @@ const Albums = ({ userId }) => {
 
   return (
     <div>
-      {albums.map((album) => (
-        <Card key={album.id} className={classes.card}>
-          <CardContent className={classes.cardContent}>
-            <Typography variant="h6">{album.title}</Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => handleViewGallery(album.id)}
-              //   style={{ backgroundColor: theme1.palette.primary.main }}
+      <Grid container spacing={3}>
+        {albums.map((album) => (
+          <Grid item xs={12} sm={6} md={4} style={{ display: "flex" }}>
+            <Card
+              key={album.id}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+                width: "100%",
+                height: "100%",
+                marginBottom: 0,
+                paddingBottom: 0,
+              }}
+              raised
+              className={classes.card}
+              // sx={{
+              // "&hover": {
+              //            box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8)
+              //         },
+              //       }}
             >
-              View Gallery
-            </Button>
-          </CardContent>
-        </Card>
-      ))}
+              <CardContent sx={{ p: 0, "&:last-child": { pb: 0 } }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image={"/album.jpeg"}
+                  alt="green iguana"
+                />
+                <Box sx={{ p: 2 }}>
+                  <Typography variant="h6">
+                    {album.title.length <= 28
+                      ? album.title
+                      : album.title.substr(0, 28) + "..."}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ mt: 1, mb: 2 }}
+                  >
+                    Lizards are a widespread group of squamate reptiles, with
+                    over 6,000 species, ranging across all continents except
+                    Antarctica
+                  </Typography>
+                  <Link
+                    component="button"
+                    variant="contained"
+                    color="primary"
+                    underline="none"
+                    className={classes.link}
+                    onClick={() => handleViewGallery(album.id)}
+                    sx={{ p: 0, fontSize: "16px" }}
+                  >
+                    View Gallery
+                  </Link>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
       <div className={classes.pagination}>
         <Pagination
           count={totalPages}

@@ -7,8 +7,8 @@ import {
   Typography,
   Pagination,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import { getUsers } from "./api";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,7 +77,9 @@ const UserList = () => {
               />
             </Grid>
             <Grid item className={classes.userDetails}>
-              <Typography variant="h6">{user.name}</Typography>
+              <Typography variant="h6" sx={{ fontStyle: "italic" }}>
+                {user.name}
+              </Typography>
               <Typography variant="body1">Email: {user.email}</Typography>
               <Typography variant="body1">Username: {user.username}</Typography>
             </Grid>
@@ -99,6 +101,7 @@ const UserList = () => {
           count={Math.ceil(users.length / usersPerPage)}
           page={page}
           onChange={handlePageChange}
+          color="primary"
         />
       </div>
     </div>

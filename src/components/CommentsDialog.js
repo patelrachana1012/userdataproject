@@ -1,42 +1,25 @@
 import React from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  Typography,
-  Divider,
-  makeStyles,
-} from "@mui/material";
+import { List, ListItem, ListItemText, Typography } from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-  comment: {
-    marginBottom: theme.spacing(2),
-  },
-}));
-
-const CommentsDialog = ({ open, onClose, post }) => {
-  const classes = useStyles();
-
+const CommentsDialog = ({ comments, postTitle }) => {
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>Comments for "{post.title}"</DialogTitle>
-      <DialogContent>
-        {post.comments.map((comment, index) => (
-          <div key={comment.id} className={classes.comment}>
-            <Typography variant="subtitle1">{comment.name}</Typography>
-            <Typography variant="body2">{comment.body}</Typography>
-            {index !== post.comments.length - 1 && <Divider />}
-          </div>
+    <div>
+      <Typography variant="h6">{postTitle}</Typography>
+      <List>
+        {comments.map((comment) => (
+          <ListItem key={comment.id}>
+            <ListItemText
+              primary={
+                <Typography variant="subtitle1" fontStyle="italic">
+                  {comment.name}
+                </Typography>
+              }
+              secondary={comment.body}
+            ></ListItemText>
+          </ListItem>
         ))}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="primary">
-          Close
-        </Button>
-      </DialogActions>
-    </Dialog>
+      </List>
+    </div>
   );
 };
 

@@ -7,10 +7,9 @@ import {
   CardMedia,
   IconButton,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
-import theme1 from "./theme";
-import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   galleryItem: {
     marginBottom: theme.spacing(2),
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.grey[500],
   },
   cardContent: {
-    backgroundColor: theme1.palette.background.primary,
+    backgroundColor: theme.palette.background.primary,
   },
 }));
 
