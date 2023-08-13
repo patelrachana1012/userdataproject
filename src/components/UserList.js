@@ -31,12 +31,23 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(10),
     height: theme.spacing(10),
     marginRight: theme.spacing(2),
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
   },
   userDetails: {
     flexGrow: 1,
   },
   viewProfileButton: {
-    marginLeft: "auto",
+    // marginLeft: "auto",
+    [theme.breakpoints.down("md")]: {
+      width: "100%", // Full-width on xs screens
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+    },
   },
   pagination: {
     display: "flex",
@@ -74,7 +85,11 @@ const UserList = () => {
     <div className={classes.root}>
       {displayedUsers.map((user) => (
         <Paper key={user.id} elevation={3} className={classes.userCard}>
-          <Grid container alignItems="center">
+          <Grid
+            container
+            alignItems="center"
+            sx={{ flexDirection: { xs: "column", md: "row" } }}
+          >
             <Grid item>
               <Avatar
                 alt={user.name}
@@ -131,6 +146,8 @@ const UserList = () => {
                 color="primary"
                 component={Link}
                 to={`/profile/${user.id}`}
+                className={classes.viewProfileButton}
+                sx={{ marginTop: { xs: "10px", md: "0" } }}
               >
                 View Profile
               </Button>
