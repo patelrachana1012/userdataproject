@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import EmailIcon from "@mui/icons-material/Email";
 import {
   Tabs,
   Tab,
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tabsContainer: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.secondary,
+    backgroundColor: theme.palette.secondary.light,
     padding: 0,
   },
   tabPanelFullWidth: {
@@ -80,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
   },
   tabLabel: {
     color: theme.palette.text.secondary,
+  },
+  icon: {
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -154,8 +158,11 @@ const ProfileTabs = () => {
                   <Box component="span" sx={{ display: "block" }}>
                     @{user.username}
                   </Box>
-                  <Box component="span" sx={{ display: "block" }}>
-                    Email: {user.email}
+                  <Box
+                    component="div"
+                    sx={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <EmailIcon className={classes.icon} /> &nbsp; {user.email}
                   </Box>
                 </Box>
               </Paper>

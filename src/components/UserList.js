@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import EmailIcon from "@mui/icons-material/Email";
+import LanguageIcon from "@mui/icons-material/Language";
+import CallIcon from "@mui/icons-material/Call";
 import {
   Paper,
   Grid,
@@ -25,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.1)",
   },
   avatar: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    width: theme.spacing(10),
+    height: theme.spacing(10),
     marginRight: theme.spacing(2),
   },
   userDetails: {
@@ -39,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     marginTop: theme.spacing(3),
+  },
+  icon: {
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -74,14 +80,50 @@ const UserList = () => {
                 alt={user.name}
                 src={`https://i.pravatar.cc/100?u=${user.id}`}
                 className={classes.avatar}
+                sx={{ height: "65px", width: "65px" }}
               />
             </Grid>
             <Grid item className={classes.userDetails}>
               <Typography variant="h6" sx={{ fontStyle: "italic" }}>
                 {user.name}
               </Typography>
-              <Typography variant="body1">Email: {user.email}</Typography>
-              <Typography variant="body1">Username: {user.username}</Typography>
+              <Typography variant="body1" sx={{ display: "flex" }}>
+                {" "}
+                <EmailIcon
+                  className={classes.icon}
+                  sx={{
+                    marginRight: "8px",
+                    fontSize: "36px",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />{" "}
+                &nbsp; {user.email}
+              </Typography>
+              <Typography variant="body1" sx={{ display: "flex" }}>
+                <LanguageIcon
+                  className={classes.icon}
+                  sx={{
+                    marginRight: "8px",
+                    fontSize: "36px",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />{" "}
+                &nbsp; {user.website}
+              </Typography>
+              <Typography variant="body1" sx={{ display: "flex" }}>
+                <CallIcon
+                  className={classes.icon}
+                  style={{
+                    marginRight: "8px",
+                    fontSize: "36px",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />{" "}
+                &nbsp; {user.phone}
+              </Typography>
             </Grid>
             <Grid item className={classes.viewProfileButton}>
               <Button

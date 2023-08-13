@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     padding: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.light,
+    // backgroundColor: theme.palette.secondary.light,
     color: "#293132",
   },
   customClass: {
@@ -141,6 +141,7 @@ const Posts = ({ userId }) => {
             <Typography
               variant="h6"
               className={(classes.cardText, classes.customFont)}
+              sx={{ marginTop: { xs: "10px" } }}
             >
               {post.title}
             </Typography>
