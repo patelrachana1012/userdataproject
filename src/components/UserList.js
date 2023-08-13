@@ -99,7 +99,10 @@ const UserList = () => {
               />
             </Grid>
             <Grid item className={classes.userDetails}>
-              <Typography variant="h6" sx={{ fontStyle: "italic" }}>
+              <Typography
+                variant="h6"
+                sx={{ fontStyle: "italic", textAlign: { xs: "center" } }}
+              >
                 {user.name}
               </Typography>
               <Typography variant="body1" sx={{ display: "flex" }}>
