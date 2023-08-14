@@ -115,7 +115,7 @@ const UserList = () => {
               >
                 {user.name}
               </Typography>
-              <Typography variant="body1" sx={{ display: "flex" }}>
+              <Typography variant="body1" sx={{ display: "flex" }} com>
                 {" "}
                 <EmailIcon
                   className={classes.icon}

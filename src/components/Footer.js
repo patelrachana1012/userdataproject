@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 
@@ -19,7 +19,7 @@ export default function Footer() {
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={5}>
+        <Grid container spacing={5} mb={3}>
           <Grid item xs={12} sm={4}>
             <Typography variant="h6" gutterBottom>
               About Us
@@ -79,8 +79,9 @@ export default function Footer() {
             </Link>
           </Grid>
         </Grid>
-        <Box mt={5}>
-          <Typography variant="body2" align="center">
+        <Divider sx={{ mt: 0 }} />
+        <Box mt={1}>
+          <Typography variant="body1" align="left" fontSize={12}>
             {"Copyright © "}
             <Link color="inherit" href="https://qstrat.com/our-company/">
               qstrat
