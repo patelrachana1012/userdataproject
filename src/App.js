@@ -9,6 +9,7 @@ import Sidebar from "./components/Sidebar";
 import theme from "./components/theme";
 import ContactDetail from "./components/ContactDetail";
 import About from "./components/About";
+import Footer from "./components/Footer";
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactDetail />} />
         </Routes>
+        <Footer />
       </Router>
     </ThemeProvider>
   );

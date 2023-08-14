@@ -32,18 +32,18 @@ const theme = createTheme({
   //       width: 240,
   //       flexShrink: 0,
   //     },
-  //     background: {
-  //       //   default: "#fafafa", // Default background color
-  //       //paper: "#fff", // Background color for paper components
-  //       primary: "#EFF2F1",
-  //       secondary: "#737478",
-  //     },
-  //     text: {
-  //       primary: "#2A373E", // Primary text color
-  //       secondary: "#fff", // Secondary text color
-  //       disabled: "#aaa", // Disabled text color
-  //       hint: "#888", // Hint text color
-  //     },
+  background: {
+    //   default: "#fafafa", // Default background color
+    //paper: "#fff", // Background color for paper components
+    primary: "#EFF2F1",
+    secondary: "#737478",
+  },
+  text: {
+    primary: "#2A373E", // Primary text color
+    secondary: "#fff", // Secondary text color
+    disabled: "#aaa", // Disabled text color
+    hint: "#888", // Hint text color
+  },
   //   },
 });
 
