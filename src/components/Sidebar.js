@@ -108,14 +108,6 @@ function Sidebar(props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              // <Button
-              //   key={item.title}
-              //   sx={{ color: "#fff" }}
-              //   component={Link}
-              //   to={item.path}
-              // >
-              //    {item.title}
-              // </Button>
               <Link
                 href={item.path}
                 sx={{

@@ -83,6 +83,13 @@ const UserList = () => {
 
   return (
     <div className={classes.root}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ textAlign: "center", pt: 1, pb: 1 }}
+      >
+        User Data
+      </Typography>
       {displayedUsers.map((user) => (
         <Paper key={user.id} elevation={3} className={classes.userCard}>
           <Grid
@@ -119,7 +126,7 @@ const UserList = () => {
                     height: "20px",
                   }}
                 />{" "}
-                &nbsp; {user.email}
+                {user.email}
               </Typography>
               <Typography variant="body1" sx={{ display: "flex" }}>
                 <LanguageIcon
@@ -131,7 +138,7 @@ const UserList = () => {
                     height: "20px",
                   }}
                 />{" "}
-                &nbsp; {user.website}
+                {user.website}
               </Typography>
               <Typography variant="body1" sx={{ display: "flex" }}>
                 <CallIcon
@@ -143,7 +150,7 @@ const UserList = () => {
                     height: "20px",
                   }}
                 />{" "}
-                &nbsp; {user.phone}
+                {user.phone}
               </Typography>
             </Grid>
             <Grid item className={classes.viewProfileButton}>
