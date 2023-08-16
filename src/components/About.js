@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Typography, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import ImageCarousel from "./ImageCarousel"; // Adjust the import path
+import ImageCarousel from "./ImageCarousel";
 
 const useStyles = makeStyles((theme) => ({
   root: {

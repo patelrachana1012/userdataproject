@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   Typography,
-  Button,
   Pagination,
   Grid,
   Box,
@@ -16,11 +15,11 @@ import CardMedia from "@mui/material/CardMedia";
 const useStyles = makeStyles((theme) => ({
   card: {
     marginBottom: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.light, // Set the background color
+    backgroundColor: theme.palette.secondary.light,
     borderRadius: theme.spacing(2),
-    transition: "transform 0.2s", // Add a transition effect
+    transition: "transform 0.2s",
     "&:hover": {
-      transform: "scale(1.05)", // Apply scale transformation on hover
+      transform: "scale(1.05)",
     },
   },
   pagination: {
@@ -35,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline #000000",
     },
   },
-
   overrides: {
     MuiCardContent: {
       root: {
@@ -55,7 +53,7 @@ const Albums = ({ userId }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [selectedAlbum, setSelectedAlbum] = useState(null);
 
-  const albumsPerPage = 6; // Number of albums to display per page
+  const albumsPerPage = 6;
 
   useEffect(() => {
     axios
@@ -103,11 +101,6 @@ const Albums = ({ userId }) => {
               }}
               raised
               className={classes.card}
-              // sx={{
-              // "&hover": {
-              //            box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8)
-              //         },
-              //       }}
             >
               <CardContent sx={{ p: 0, "&:last-child": { pb: 0 } }}>
                 <CardMedia

@@ -41,9 +41,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   viewProfileButton: {
-    // marginLeft: "auto",
     [theme.breakpoints.down("md")]: {
-      width: "100%", // Full-width on xs screens
+      width: "100%",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",

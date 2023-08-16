@@ -9,9 +9,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  List,
-  ListItem,
-  ListItemText,
   Button,
   Box,
 } from "@mui/material";
@@ -25,13 +22,10 @@ import Tooltip from "@mui/material/Tooltip";
 const useStyles = makeStyles((theme) => ({
   card: {
     marginBottom: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main, // Set the background color
+    backgroundColor: theme.palette.secondary.main,
     borderRadius: theme.spacing(1),
     position: "relative",
     padding: 0,
-  },
-  customFont: {
-    fontFamily: theme.typography.fontFamily,
   },
   iconContainer: {
     position: "absolute",
@@ -49,12 +43,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
   },
   rightAlign: {
-    textAlign: "right", // Align content to the right
-  },
-  cardContent: {
-    padding: theme.spacing(2),
-    // backgroundColor: theme.palette.secondary.light,
-    color: "#293132",
+    textAlign: "right",
+    cardContent: {
+      padding: theme.spacing(2),
+      color: "#293132",
+    },
   },
   customClass: {
     padding: "0",
@@ -65,38 +58,23 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   icon: {
-    verticalAlign: "middle", // Adjust icon alignment
-    marginRight: theme.spacing(1), // Add some spacing after the icon
+    verticalAlign: "middle",
+    marginRight: theme.spacing(1),
   },
   cardText: {
     fontWeight: "bolder",
   },
 }));
 
-const PostComponent = ({ post }) => {
-  const classes = useStyles();
-  const [openDialog, setOpenDialog] = useState(false);
-
-  const handleDialogOpen = () => {
-    setOpenDialog(true);
-  };
-
-  const handleDialogClose = () => {
-    setOpenDialog(false);
-  };
-};
-
 const Posts = ({ userId }) => {
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  // const [data, setData] = useState([]);
-  const [selectedPost, setSelectedPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [postTitle, setPostTitle] = useState("");
-  const postsPerPage = 5; // Number of posts to display per page
+  const postsPerPage = 5;
 
   useEffect(() => {
     axios
@@ -159,10 +137,7 @@ const Posts = ({ userId }) => {
               {post.body}
             </Typography>
             <div className={classes.iconContainer}>
-              <Link
-                // to={`/post/${post.id}`}
-                onClick={() => fetchComments(post.id, post.title)}
-              >
+              <Link onClick={() => fetchComments(post.id, post.title)}>
                 <Tooltip title="View Comments">
                   {" "}
                   <CommentIcon className={classes.icon} />

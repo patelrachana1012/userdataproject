@@ -1,9 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserList from "./components/UserList";
 import ProfileDetail from "./components/ProfileDetail";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-// import Comments from "./components/Comments";
 import CommentsDialog from "./components/CommentsDialog";
 import Sidebar from "./components/Sidebar";
 import theme from "./components/theme";

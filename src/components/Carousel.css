@@ -1,15 +1,11 @@
 .carousel-container {
     width: 100%;
     max-width: 600px;
-    /* Adjust as needed */
     margin: 0 auto;
 }
 
 .carousel-image {
     width: 100%;
-    /* Set the desired image width */
     height: 300px;
-    /* Set the desired image height */
     object-fit: cover;
-    /* Maintain aspect ratio while covering container */
 }

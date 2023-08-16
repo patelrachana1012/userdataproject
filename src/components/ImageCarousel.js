@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import "./Carousel.css"; // Create this stylesheet to customize carousel styles
-
+import "./Carousel.css";
 const ImageCarousel = ({ images }) => {
   const settings = {
     dots: true,
@@ -10,7 +9,6 @@ const ImageCarousel = ({ images }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
   return (
     <div className="carousel-container">
       <Slider {...settings}>

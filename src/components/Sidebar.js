@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,9 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-// import logo from "./qstrat.png";
 const drawerWidth = 240;
 const navItems = [
   { title: "Home", path: "/" },
@@ -98,6 +95,7 @@ function Sidebar(props) {
                 component="img"
                 sx={{
                   height: 70,
+                  width: 70,
                   flexGrow: 1,
                   display: { xs: "none", sm: "block" },
                 }}
@@ -130,7 +128,7 @@ function Sidebar(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -149,13 +147,5 @@ function Sidebar(props) {
     </Box>
   );
 }
-
-Sidebar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
 
 export default Sidebar;

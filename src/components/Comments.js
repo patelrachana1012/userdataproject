@@ -21,12 +21,10 @@ const Comments = () => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    // Fetch post details based on postId
     fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
       .then((response) => response.json())
       .then((data) => setPost(data));
 
-    // Fetch comments based on postId
     fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
       .then((response) => response.json())
       .then((data) => setComments(data));

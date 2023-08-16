@@ -29,7 +29,6 @@ export default function ContactDetail() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //
   };
   const classes = useStyles();
   return (

@@ -10,7 +10,6 @@ import {
   Paper,
   Typography,
   Avatar,
-  ThemeProvider,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
@@ -18,16 +17,11 @@ import Posts from "./Posts";
 import Albums from "./Albums";
 import axios from "axios";
 
-//import { makeStyles } from "@material-ui/core/styles";
-// import theme1 from "./theme";
-import { Margin } from "@mui/icons-material";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     paddingTop: theme.spacing(2),
     padding: "10px",
-    // minHeight: "100vh", // Ensure full viewport height
-    // padding: "-24px",
   },
   tab: {
     "& .MuiBox-root": {
@@ -43,14 +37,13 @@ const useStyles = makeStyles((theme) => ({
   avatarContainer: {
     display: "flex",
     alignItems: "center",
-    // marginBottom: theme.spacing(3),\
     padding: 20,
   },
   customClass: {
     padding: "0",
-    transition: "transform 0.2s", // Add a transition effect
+    transition: "transform 0.2s",
     "&:hover": {
-      transform: "scale(1.05)", // Apply scale transformation on hover
+      transform: "scale(1.05)",
       fontWeight: "bold",
     },
   },
@@ -70,14 +63,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   tabPanelFullWidth: {
-    width: "100%", // Set the width to 100%
-  },
-  profileHeader: {
-    //backgroundColor: "#f00", // Bright orange color
-    //color: "#f00",
-    // padding: theme.spacing(2),
-    // borderRadius: theme.spacing(2),
-    // boxShadow: theme.shadows[3],
+    width: "100%",
   },
   tabLabel: {
     color: theme.palette.text.secondary,
@@ -234,22 +220,6 @@ const ProfileTabs = () => {
           )}
         </Grid>
       </Container>
-    </div>
-  );
-};
-
-const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`tab-panel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 };
