@@ -141,7 +141,7 @@ const Posts = ({ userId }) => {
             <Typography
               variant="h6"
               className={(classes.cardText, classes.customFont)}
-              sx={{ marginTop: { xs: "10px" } }}
+              sx={{ marginTop: { xs: "10px", md: 0 } }}
             >
               {post.title}
             </Typography>

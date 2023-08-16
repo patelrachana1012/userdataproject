@@ -79,7 +79,7 @@ export default function Footer() {
             </Link>
           </Grid>
         </Grid>
-        <Divider sx={{ mt: 0 }} />
+        <Divider sx={{ mt: 0 }} borderColor={"primary"} />
         <Box mt={1}>
           <Typography variant="body1" align="left" fontSize={12}>
             {"Copyright © "}
