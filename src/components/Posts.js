@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
   customFont: {
     fontFamily: theme.typography.fontFamily,
     fontWeight: "bolder",
+    fontSize: "30px",
   },
   rightAlign: {
     textAlign: "right", // Align content to the right
@@ -141,7 +142,12 @@ const Posts = ({ userId }) => {
             <Typography
               variant="h6"
               className={(classes.cardText, classes.customFont)}
-              sx={{ marginTop: { xs: "10px", md: 0 } }}
+              sx={{
+                marginTop: { xs: "10px", md: 0 },
+                fontSize: 18,
+                fontWeight: "bold",
+                fontStyle: "italic",
+              }}
             >
               {post.title}
             </Typography>
